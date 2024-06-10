@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDALGGAKEATS</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .payment-container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        .total-cost {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+            height: fit-content;
+            margin-right: 40px; /* Increased margin to push it left */
+        }
+        .card-selection {
+            margin-bottom: 20px;
+        }
+        .card-button {
+            margin: 10px 0;
+        }
+        .card-button img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .btn-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            height: 60px; /* Adjust height to better fit the image and text */
+        }
+        .btn-card:hover {
+            background-color: #e2e6ea;
+        }
+        .btn-card img {
+            max-height: 40px; /* Set a max height for images */
+        }
+        .content-wrapper {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center; /* Center the content */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container payment-container">
+    <div class="content-wrapper">
+        <div class="total-cost">
+            <h3>결제 금액</h3>
+            <p>'Total cost' 원</p>
+        </div>
+        <div>
+            <h3 class="text-center">결제 수단 선택</h3>
+            <form id="paymentForm">
+                <div class="row">
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="신한은행.jpg" alt="신한은행">
+                            신한은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="농협.jpg" alt="농협">
+                            농협
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="하나은행.jpg" alt="하나은행">
+                            하나은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="비씨카드.jpg" alt="비씨카드">
+                            비씨카드
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="삼성카드.jpg" alt="삼성카드">
+                            삼성카드
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="우리은행.jpg" alt="우리은행">
+                            우리은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="카카오뱅크.jpg" alt="카카오뱅크">
+                            카카오뱅크
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="토스뱅크.jpg" alt="토스뱅크">
+                            토스뱅크
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-block mt-4">결제하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        alert('결제가 완료되었습니다!');
+        window.location.href = 'main.html';
+    });
+
+    document.querySelectorAll('.btn-card').forEach(function(button) {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.btn-card').forEach(function(btn) {
+                btn.style.backgroundColor = '#f8f9fa';
+            });
+            button.style.backgroundColor = '#e2e6ea';
+        });
+    });
+</script>
+</body>
+</html>
+
