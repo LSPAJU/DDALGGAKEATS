@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDALGGAKEATS</title>
+    <link rel="icon" type="image/jpg" href="DDALGGAK.jpg">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .payment-container {
@@ -60,7 +61,7 @@
     <div class="content-wrapper">
         <div class="total-cost">
             <h3>결제 금액</h3>
-            <p>'Total cost' 원</p>
+            <p id="total-cost-display">0원</p>
         </div>
         <div>
             <h3 class="text-center">결제 수단 선택</h3>
@@ -68,49 +69,61 @@
                 <div class="row">
                     <div class="col-md-6 card-selection">
                         <div class="btn-card">
-                            <img src="신한은행.jpg" alt="신한은행">
-                            신한은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="농협.jpg" alt="농협">
-                            농협
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="하나은행.jpg" alt="하나은행">
-                            하나은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="비씨카드.jpg" alt="비씨카드">
-                            비씨카드
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="삼성카드.jpg" alt="삼성카드">
-                            삼성카드
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="우리은행.jpg" alt="우리은행">
+                            <img src="bank/1.jpg" alt="우리은행">
                             우리은행
                         </div>
                     </div>
                     <div class="col-md-6 card-selection">
                         <div class="btn-card">
-                            <img src="카카오뱅크.jpg" alt="카카오뱅크">
+                            <img src="bank/2.jpg" alt="농협은행">
+                            농협은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/3.jpg" alt="신한은행">
+                            신한은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/4.jpg" alt="삼성카드">
+                            삼성카드
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/5.jpg" alt="비씨카드">
+                            비씨카드
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/6.jpg" alt="하나은행">
+                            하나은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/7.jpg" alt="기업은행">
+                            기업은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/8.jpg" alt="국민은행">
+                            국민은행
+                        </div>
+                    </div>
+                    <div class="col-md-6 card-selection">
+                        <div class="btn-card">
+                            <img src="bank/9.jpg" alt="카카오뱅크">
                             카카오뱅크
                         </div>
                     </div>
                     <div class="col-md-6 card-selection">
                         <div class="btn-card">
-                            <img src="토스뱅크.jpg" alt="토스뱅크">
+                            <img src="bank/10.jpg" alt="토스뱅크">
                             토스뱅크
                         </div>
                     </div>
@@ -125,10 +138,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var totalCost = localStorage.getItem('paySum');
+        document.getElementById('total-cost-display').innerText = totalCost + '원';
+    });
+
     document.getElementById('paymentForm').addEventListener('submit', function(event) {
         event.preventDefault();
+        var totalCost = localStorage.getItem('paySum');
+        var orderNumber = Math.floor(Math.random() * 100) + 1; // 1부터 100까지의 임의의 주문번호 생성
+        localStorage.setItem('orderNumber', orderNumber);
+        localStorage.setItem('totalCost', totalCost);
         alert('결제가 완료되었습니다!');
-        window.location.href = 'main.html';
+        window.location.href = 'receipt.html';
     });
 
     document.querySelectorAll('.btn-card').forEach(function(button) {
@@ -142,4 +164,3 @@
 </script>
 </body>
 </html>
-

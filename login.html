@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDALGGAKEATS</title>
+    <link rel="icon" type="image/jpg" href="DDALGGAK.jpg">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .login-container {
             margin-top: 100px;
+        }
+        .register-link {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -18,18 +24,21 @@
         <div class="col-md-6 login-container">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Login</h3>
+                    <h3 class="card-title text-center">로그인</h3>
                     <form id="loginForm">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                            <label for="username">아이디</label>
+                            <input type="text" class="form-control" id="username" placeholder="아이디를 입력해주세요.">
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <label for="password">비밀번호</label>
+                            <input type="password" class="form-control" id="password" placeholder="비밀번호">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">로그인</button>
                     </form>
+                    <div class="register-link">
+                        <a href="register.html" class="btn btn-link">아이디가 없으신가요?</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,3 +64,5 @@
 </script>
 </body>
 </html>
+
+
