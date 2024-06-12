@@ -1,15 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDALGGAKEATS</title>
+    <link rel="icon" type="image/jpg" href="DDALGGAK.jpg">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=5c08382f567ac8871f85619e8993bca5"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #FFFDD0; /* 기본 연한 크림색 배경 */
+        }
+        .top-strip {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60px; /* 지도 위쪽 공백 정도의 높이 */
+            background-color: #013220; /* 어두운 녹색 */
+        }
+        .left-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+            padding: 20px;
+            background-color: #FFFDD0;
+        }
+        .left-container h1 {
+            margin-bottom: 50px;
+            font-size: 5em;
+            color: #013220;
+        }
+        .left-container img {
+            width: 350px;
+            margin: 30px 0; 
+        }
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-container a {
+            padding: 10px 30px;
+            font-size: 18px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .login-container a:hover {
+            background-color: #0056b3;
+        }
+        .right-container {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FFFDD0; /* 연한 크림색 배경 */
+        }
+        #map {
+            width: 90%;
+            height: 90%;
+            border: 2px solid #000;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .bottom-strip {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /* 지도 아래쪽 공백 정도의 높이 */
+            background-color: #013220; /* 어두운 녹색 */
+}
+    </style>
 </head>
 <body>
-    <h1>Welcome to DDALGGAKEATS</h1>
-    <a href="login.html">Login</a>
-    <a href="choice.html">Choice</a>
-    <a href="main.html">Main</a>
-    <a href="cost.html">Cost</a>
+    <div class="top-strip"></div>
+    <div class="left-container">
+        <h1>딸깍잇츠</h1>
+        <img src="DDALGGAK.jpg" alt="DDALGGAK">
+        <div class="login-container">
+            <div class="button-group">
+                <a href="login.html">로그인</a>
+                <a href="register.html">회원가입</a>
+            </div>
+        </div>
+    </div>
+    <div class="right-container">
+        <div id="map"></div>
+    </div>
+
+    <script>
+        // 카카오맵 초기화
+        var mapContainer = document.getElementById('map'), 
+            mapOption = { 
+                center: new kakao.maps.LatLng(37.5665, 126.9780), // 서울 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // HTML5의 geolocation으로 사용할 수 있는지 확인 
+        if (navigator.geolocation) {
+            // GeoLocation을 이용해서 접속 위치를 얻어옴
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude, // 위도
+                    lon = position.coords.longitude; // 경도
+
+                var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+
+                // 인포윈도우 내용 설정
+                var iwContent = '<div style="width: auto; text-align: center;width:200px">현재 위치</div>',
+                    iwRemoveable = true;
+
+                // 인포윈도우 생성
+                var infowindow = new kakao.maps.InfoWindow({
+                    content : iwContent,
+                    removable : iwRemoveable
+                });
+
+                // 마커와 인포윈도우를 표시
+                displayMarker(locPosition, infowindow);
+            }, function(error) {
+                console.error('Error occurred. Error code: ' + error.code);
+                // Error handling (optional)
+            });
+        } else {
+            // HTML5의 GeoLocation을 사용할 수 없을때 기본 위치 설정
+            var locPosition = new kakao.maps.LatLng(37.5665, 126.9780),
+                iwContent = '<div style="width: auto; text-align: center; padding: 6px;">위치를 찾을 수 없어요..</div>',
+                iwRemoveable = true;
+
+            var infowindow = new kakao.maps.InfoWindow({
+                content : iwContent,
+                removable : iwRemoveable
+            });
+
+            displayMarker(locPosition, infowindow);
+        }
+
+        // 지도에 마커와 인포윈도우를 표시하는 함수
+        function displayMarker(locPosition, infowindow) {
+            // 마커 생성
+            var marker = new kakao.maps.Marker({  
+                map: map, 
+                position: locPosition
+            });
+
+            // 인포윈도우 마커위에 표시
+            infowindow.open(map, marker);
+
+            // 지도 중심좌표를 접속위치로 변경
+            map.setCenter(locPosition);      
+        }
+    </script>
+    <div class="bottom-strip"></div>
 </body>
 </html>

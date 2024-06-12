@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDALGGAKEATS</title>
+    <link rel="icon" type="image/jpg" href="DDALGGAK.jpg">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .receipt {
+            border: 1px solid #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+        .receipt h3 {
+            margin-bottom: 20px;
+        }
+        .receipt p {
+            margin: 10px 0;
+        }
+        .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <h3>영수증</h3>
+        <p>결제 금액: <span id="total-cost"></span>원</p>
+        <p>번호: <span id="order-number"></span></p>
+        <p>주문번호: <span id="order-id"></span></p>
+        <button class="home-button" onclick="goHome()">홈으로</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var totalCost = localStorage.getItem('totalCost');
+            var orderNumber = localStorage.getItem('orderNumber');
+            var orderId = Math.floor(Math.random() * 100) + 1; // 1부터 100까지의 임의의 주문번호 생성
+
+            document.getElementById('total-cost').innerText = totalCost;
+            document.getElementById('order-number').innerText = orderNumber;
+            document.getElementById('order-id').innerText = orderId;
+        });
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
