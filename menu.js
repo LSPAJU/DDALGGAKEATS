@@ -1,6 +1,7 @@
+// menu.js
 window.onload = function () {
     getItem();
-    showMenu(0); // 기본으로 첫 번째 분류(추천 메뉴)를 표시합니다.
+    showMenu(0);
 };
 
 function getItem() {
@@ -85,3 +86,29 @@ document.querySelectorAll('input[name="menu-option"]').forEach(function(input) {
         }
     });
 });
+
+function addToCart() {
+    var selectedOption = document.querySelector('input[name="menu-option"]:checked').value;
+    var menuItem = {
+        img: currentMenu.src,
+        name: currentMenu.name + ' (' + selectedOption + ')',
+        price: parseInt(currentMenu.price.replace(/[^0-9]/g, ''), 10),
+        cnt: 1,
+        toppings: []
+    };
+
+    if (selectedOption === 'combo' || selectedOption === 'set') {
+        if (selectedOption === 'combo') {
+            menuItem.price += 300;
+            menuItem.toppings.push('음료수: ' + document.querySelector('input[name="combo-drink"]:checked').value);
+        } else if (selectedOption === 'set') {
+            menuItem.price += 700;
+            menuItem.toppings.push('음료수: ' + document.querySelector('input[name="set-drink"]:checked').value);
+            menuItem.toppings.push('사이드: ' + document.querySelector('input[name="set-side"]:checked').value);
+        }
+    }
+
+    cartList.push(menuItem);
+    updateCart();
+    closePopup();
+}

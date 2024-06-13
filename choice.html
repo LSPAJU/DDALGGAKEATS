@@ -14,60 +14,103 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            background-color: #FFFDD0; /* 연한 크림색 배경 */
+        }
+        .top-strip {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #013220; /* 어두운 녹색 */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 20px;
+        }
+        .logout, .back-home {
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            text-decoration: underline;
+            margin-left: 10px;
         }
         h1 {
             margin-bottom: 20px;
+            margin-bottom: 50px;
+            font-size: 5em;
+            color: #013220;
         }
         .image-container {
             margin-bottom: 20px;
         }
         .button-container {
-            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+        }
+        .button-with-estimate {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .button-container button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
+            margin-top: 15px;
+            padding: 20px 40px;
+            font-size: 24px;
             cursor: pointer;
+            background-color: #FF6347;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: bold;
+        }
+        .button-container button:hover {
+            background-color: #FF4500;
+            transform: scale(1.05);
         }
         .estimate {
             margin-top: 10px;
-            font-size: 16px;
+            font-size: 24px;
+            font-weight: bold;
         }
-        .logout {
-            font-size: 14px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
+        .bottom-strip {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #013220;
         }
     </style>
 </head>
 <body>
+    <div class="top-strip">
+        <div class="logout" onclick="location.href='index.html'">로그아웃</div>
+        <div class="back-home" onclick="location.href='choice.html'">홈</div>
+    </div>
     <h1>딸깍잇츠</h1>
     <div class="image-container">
-        <img src="DDALGGAK.jpg" alt="DDALGGAKEATS" width="200">
+        <img src="DDALGGAK.jpg" alt="DDALGGAKEATS" width="350">
     </div>
     <div class="button-container">
-        <div class="logout" onclick="location.href='login.html'">로그아웃</div>
-        <button onclick="location.href='main.html'">배달</button>
-        <div id="deliveryEstimate" class="estimate"></div>
-        <button onclick="location.href='main.html'">픽업</button>
-        <div id="pickupEstimate" class="estimate"></div>
+        <div class="button-with-estimate">
+            <button onclick="location.href='main.html'">배달</button>
+            <div id="deliveryEstimate" class="estimate"></div>
+        </div>
+        <div class="button-with-estimate">
+            <button onclick="location.href='main.html'">픽업</button>
+            <div id="pickupEstimate" class="estimate"></div>
+        </div>
     </div>
 
     <script>
-        // 랜덤 시간 생성 함수
         function getRandomTime(min, max, step) {
             const range = (max - min) / step + 1;
             const random = Math.floor(Math.random() * range);
             return min + random * step;
         }
 
-        // 페이지 로드 시 랜덤 시간 표시
         window.onload = function() {
             const deliveryTime = getRandomTime(15, 60, 5);
             const pickupTime = getRandomTime(10, 30, 5);
@@ -75,6 +118,6 @@
             document.getElementById('pickupEstimate').innerText = `${pickupTime}분 예상`;
         }
     </script>
+    <div class="bottom-strip"></div>
 </body>
 </html>
-

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,50 +8,52 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .payment-container {
-            margin-top: 50px;
+            margin-top: 150px;
             display: flex;
             justify-content: center;
-        }
-        .total-cost {
-            border: 1px solid #ccc;
-            padding: 20px;
-            text-align: center;
-            height: fit-content;
-            margin-right: 40px; /* Increased margin to push it left */
         }
         .card-selection {
             margin-bottom: 20px;
         }
-        .card-button {
-            margin: 10px 0;
-        }
-        .card-button img {
-            height: 30px;
-            margin-right: 10px;
-        }
         .btn-card {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             width: 100%;
-            padding: 10px;
+            padding: 20px;
             margin-bottom: 10px;
-            border: 1px solid #007bff;
-            border-radius: 5px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
             background-color: #f8f9fa;
             cursor: pointer;
-            height: 60px; /* Adjust height to better fit the image and text */
+            font-size: 20px;
+            font-weight: bold;
         }
         .btn-card:hover {
             background-color: #e2e6ea;
         }
         .btn-card img {
-            max-height: 40px; /* Set a max height for images */
+            max-height: 40px;
         }
         .content-wrapper {
             display: flex;
-            align-items: flex-start;
-            justify-content: center; /* Center the content */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .bank-name {
+            flex-grow: 1;
+            text-align: center;
+            margin-left: 20px;
+        }
+        .payment-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        .btn-submit {
+            font-size: 24px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -59,78 +61,72 @@
 
 <div class="container payment-container">
     <div class="content-wrapper">
-        <div class="total-cost">
-            <h3>결제 금액</h3>
-            <p id="total-cost-display">0원</p>
-        </div>
-        <div>
-            <h3 class="text-center">결제 수단 선택</h3>
-            <form id="paymentForm">
-                <div class="row">
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/1.jpg" alt="우리은행">
-                            우리은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/2.jpg" alt="농협은행">
-                            농협은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/3.jpg" alt="신한은행">
-                            신한은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/4.jpg" alt="삼성카드">
-                            삼성카드
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/5.jpg" alt="비씨카드">
-                            비씨카드
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/6.jpg" alt="하나은행">
-                            하나은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/7.jpg" alt="기업은행">
-                            기업은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/8.jpg" alt="국민은행">
-                            국민은행
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/9.jpg" alt="카카오뱅크">
-                            카카오뱅크
-                        </div>
-                    </div>
-                    <div class="col-md-6 card-selection">
-                        <div class="btn-card">
-                            <img src="bank/10.jpg" alt="토스뱅크">
-                            토스뱅크
-                        </div>
+        <h3 class="payment-title">결제 수단 선택</h3>
+        <form id="paymentForm">
+            <div class="row">
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="우리은행">
+                        <img src="bank/1.jpg" alt="우리은행">
+                        <span class="bank-name">우리은행</span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success btn-block mt-4">결제하기</button>
-            </form>
-        </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="농협은행">
+                        <img src="bank/2.jpg" alt="농협은행">
+                        <span class="bank-name">농협은행</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="신한은행">
+                        <img src="bank/3.jpg" alt="신한은행">
+                        <span class="bank-name">신한은행</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="삼성카드">
+                        <img src="bank/4.jpg" alt="삼성카드">
+                        <span class="bank-name">삼성카드</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="비씨카드">
+                        <img src="bank/5.jpg" alt="비씨카드">
+                        <span class="bank-name">비씨카드</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="하나은행">
+                        <img src="bank/6.jpg" alt="하나은행">
+                        <span class="bank-name">하나은행</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="기업은행">
+                        <img src="bank/7.jpg" alt="기업은행">
+                        <span class="bank-name">기업은행</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="국민은행">
+                        <img src="bank/8.jpg" alt="국민은행">
+                        <span class="bank-name">국민은행</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="카카오뱅크">
+                        <img src="bank/9.jpg" alt="카카오뱅크">
+                        <span class="bank-name">카카오뱅크</span>
+                    </div>
+                </div>
+                <div class="col-md-6 card-selection">
+                    <div class="btn-card" data-bank="토스뱅크">
+                        <img src="bank/10.jpg" alt="토스뱅크">
+                        <span class="bank-name">토스뱅크</span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block mt-4 btn-submit">결제하기</button>
+        </form>
     </div>
 </div>
 
@@ -138,13 +134,14 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var totalCost = localStorage.getItem('paySum');
-        document.getElementById('total-cost-display').innerText = totalCost + '원';
-    });
+    var selectedBank = null;
 
     document.getElementById('paymentForm').addEventListener('submit', function(event) {
         event.preventDefault();
+        if (!selectedBank) {
+            alert("카드를 선택해주세요!");
+            return;
+        }
         var totalCost = localStorage.getItem('paySum');
         var orderNumber = Math.floor(Math.random() * 100) + 1; // 1부터 100까지의 임의의 주문번호 생성
         localStorage.setItem('orderNumber', orderNumber);
@@ -159,6 +156,7 @@
                 btn.style.backgroundColor = '#f8f9fa';
             });
             button.style.backgroundColor = '#e2e6ea';
+            selectedBank = button.getAttribute('data-bank');
         });
     });
 </script>
