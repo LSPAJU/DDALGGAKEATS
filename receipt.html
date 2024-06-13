@@ -14,39 +14,85 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
         }
+        .top-strip {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #013220; /* 어두운 녹색 */
+        }
+
         .receipt {
             border: 1px solid #ccc;
-            padding: 20px;
+            padding: 40px;
             text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 600px;
+            height: 800px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .receipt h3 {
-            margin-bottom: 20px;
+            margin-bottom: 55px;
+            font-size: 3em;
+            color: #013220; /* 어두운 녹색 */
         }
         .receipt p {
             margin: 10px 0;
+            font-size: 1.5em;
+            color: #333; /* 어두운 텍스트 색상 */
+            font-weight: bold;
+            margin-bottom: 45px;
         }
         .home-button {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 45px;
+            padding: 15px 30px;
             border: none;
             background-color: #007bff;
             color: white;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 1.5em;
+            transition: background-color 0.3s;
         }
         .home-button:hover {
             background-color: #0056b3;
         }
+        .bottom-strip {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #013220; /* 어두운 녹색 */
+        }
+        .logo-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .logo-container img {
+            max-width: 300px;
+        }
     </style>
 </head>
 <body>
+    <div class="top-strip"></div>
     <div class="receipt">
-        <h3>영수증</h3>
-        <p>결제 금액: <span id="total-cost"></span>원</p>
-        <p>번호: <span id="order-number"></span></p>
-        <p>주문번호: <span id="order-id"></span></p>
+        <div>
+            <h3>영수증</h3>
+            <p>결제 금액: <span id="total-cost"></span>원</p>
+            <p>번호: <span id="order-number"></span></p>
+            <p>주문 번호: <span id="order-id"></span></p>
+        </div>
         <button class="home-button" onclick="goHome()">홈으로</button>
+        <div class="logo-container">
+            <img src="DDALGGAK.jpg" alt="DDALGGAK">
+        </div>
     </div>
 
     <script>
@@ -64,5 +110,6 @@
             window.location.href = 'index.html';
         }
     </script>
+    <div class="bottom-strip"></div>
 </body>
 </html>

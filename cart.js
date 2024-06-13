@@ -1,4 +1,3 @@
-// cart.js
 var cartList = [];
 var paySum = 0;
 
@@ -30,19 +29,16 @@ function addToCart() {
         if (selectedOption === 'combo') {
             menuItem.price += 300;
             menuItem.name += ' (콤보)';
-            var selectedSide = document.querySelector('input[name="combo-side"]:checked').value;
             var selectedDrink = document.querySelector('input[name="combo-drink"]:checked').value;
-            menuItem.toppings.push(selectedSide);
-            menuItem.toppings.push(selectedDrink);
-            menuItem.price += getSidePriceDifference('감자튀김', selectedSide);
+            menuItem.toppings.push('음료수: ' + selectedDrink);
             menuItem.price += getDrinkPriceDifference('코카콜라', selectedDrink);
         } else if (selectedOption === 'set') {
             menuItem.price += 700;
             menuItem.name += ' (세트)';
             var selectedSide = document.querySelector('input[name="set-side"]:checked').value;
             var selectedDrink = document.querySelector('input[name="set-drink"]:checked').value;
-            menuItem.toppings.push(selectedSide);
-            menuItem.toppings.push(selectedDrink);
+            menuItem.toppings.push('음료수: ' + selectedDrink);
+            menuItem.toppings.push('사이드: ' + selectedSide);
             menuItem.price += getSidePriceDifference('감자튀김', selectedSide);
             menuItem.price += getDrinkPriceDifference('코카콜라', selectedDrink);
         }
@@ -76,7 +72,7 @@ function getDrinkPriceDifference(defaultItem, selectedItem) {
         '환타': 0,
         '사이다': 0,
         '스프라이트': 0,
-        '밀크쉐이크': 2500 // 예를 들어, 밀크쉐이크는 추가 가격이 있다면
+        '밀크쉐이크': 2500
     };
 
     return drinkPriceDifferences[selectedItem];
@@ -92,14 +88,21 @@ function updateCart() {
     cartList.forEach(function (item, index) {
         var itemHtml = '<div class="cart-item">';
         itemHtml += '<img src="' + item.img + '" width=50px height=50px>';
+        itemHtml += '<div class="details">';
         itemHtml += '<div>' + item.name + '</div>';
+        if (item.toppings && item.toppings.length > 0) {
+            item.toppings.forEach(function (topping) {
+                itemHtml += '<div class="toppings">' + topping + '</div>';
+            });
+        }
         itemHtml += '<div>' + addComma(item.price) + '원</div>';
-        itemHtml += '<div class="controls">';
-        itemHtml += '<button onclick="changeItemCount(' + index + ', 1)">+1</button>';
-        itemHtml += '<span>' + item.cnt + '</span>';
-        itemHtml += '<button onclick="changeItemCount(' + index + ', -1)">-1</button>';
         itemHtml += '</div>';
+        itemHtml += '<div class="controls">';
+        itemHtml += '<button onclick="changeItemCount(' + index + ', -1)">-1</button>';
+        itemHtml += '<span>' + item.cnt + '</span>';
+        itemHtml += '<button onclick="changeItemCount(' + index + ', 1)">+1</button>';
         itemHtml += '<button onclick="removeFromCart(' + index + ')">제거</button>';
+        itemHtml += '</div>';
         itemHtml += '</div>';
 
         cartItemsContainer.innerHTML += itemHtml;
@@ -122,20 +125,16 @@ function removeFromCart(index) {
 }
 
 function proceedToPayment() {
-    localStorage.setItem('cartList', JSON.stringify(cartList));
-    localStorage.setItem('paySum', paySum);
-    window.location.href = 'cost.html';
+    if (cartList.length === 0 || paySum === 0) {
+        alert("상품을 골라주세요!");
+    } else {
+        localStorage.setItem('cartList', JSON.stringify(cartList));
+        localStorage.setItem('paySum', paySum);
+        window.location.href = 'cost.html';
+    }
 }
 
 function addComma(num) {
     var regexp = /\B(?=(\d{3})+(?!\d))/g;
     return num.toString().replace(regexp, ',');
 }
-
-
-
-
-
-
-
-

@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="top-strip"></div>
+    <div class="top-strip">
+        <div class="logout" onclick="location.href='index.html'">로그아웃</div>
+        <div class="back-home" onclick="location.href='choice.html'">홈</div>
+    </div>
     <div class="container">
-        <!-- 메뉴 분류 버튼 -->
         <div class="tab-container">
             <button onclick="showMenu(0)" id="tab-0">추천 메뉴</button>
             <button onclick="showMenu(1)" id="tab-1">햄버거</button>
@@ -19,10 +21,8 @@
             <button onclick="showMenu(4)" id="tab-4">시즌 메뉴</button>
         </div>
 
-        <!-- 메뉴 목록을 담을 div -->
         <div class="menu-container" id="menu-container"></div>
 
-        <!-- 장바구니 목록을 담을 div -->
         <div class="cart-container" id="cart-container">
             <h2>장바구니</h2>
             <div id="cart-items"></div>
@@ -32,6 +32,46 @@
     </div>
     <div class="bottom-strip"></div>
 
+    <div id="menu-popup" class="menu-popup" style="display:none;">
+        <div id="popup-menu-name" class="popup-menu-name"></div>
+        <div>
+            <input type="radio" name="menu-option" value="original"> 기본
+            <input type="radio" name="menu-option" value="combo"> 콤보 (+300원)
+            <input type="radio" name="menu-option" value="set"> 세트 (+700원)
+        </div>
+        <div id="combo-options" style="display:none;">
+            <h4>음료수 선택</h4>
+            <input type="radio" name="combo-drink" value="코카콜라"> 코카콜라
+            <input type="radio" name="combo-drink" value="코카콜라 제로"> 코카콜라 제로
+            <input type="radio" name="combo-drink" value="펩시 제로"> 펩시 제로
+            <input type="radio" name="combo-drink" value="환타"> 환타
+            <input type="radio" name="combo-drink" value="사이다"> 사이다
+            <input type="radio" name="combo-drink" value="스프라이트"> 스프라이트
+            <input type="radio" name="combo-drink" value="밀크쉐이크"> 밀크쉐이크 (+2500원)
+        </div>
+        <div id="set-options" style="display:none;">
+            <h4>사이드 선택</h4>
+            <input type="radio" name="set-side" value="감자튀김"> 감자튀김
+            <input type="radio" name="set-side" value="양념감자"> 양념감자 (+500원)
+            <input type="radio" name="set-side" value="웨지감자"> 웨지감자
+            <input type="radio" name="set-side" value="체다치즈 감자튀김"> 체다치즈 감자튀김 (+1000원)
+            <input type="radio" name="set-side" value="치즈스틱"> 치즈스틱 (+300원)
+            <input type="radio" name="set-side" value="롱치즈스틱"> 롱치즈스틱 (+800원)
+            <input type="radio" name="set-side" value="치킨윙"> 치킨윙 (+1500원)
+            <input type="radio" name="set-side" value="치킨텐더"> 치킨텐더 (+800원)
+            <h4>음료수 선택</h4>
+            <input type="radio" name="set-drink" value="코카콜라"> 코카콜라
+            <input type="radio" name="set-drink" value="코카콜라 제로"> 코카콜라 제로
+            <input type="radio" name="set-drink" value="펩시 제로"> 펩시 제로
+            <input type="radio" name="set-drink" value="환타"> 환타
+            <input type="radio" name="set-drink" value="사이다"> 사이다
+            <input type="radio" name="set-drink" value="스프라이트"> 스프라이트
+            <input type="radio" name="set-drink" value="밀크쉐이크"> 밀크쉐이크 (+2500원)
+        </div>
+        <button onclick="addToCart()">장바구니에 추가</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+    
     <script src="data.js"></script>
     <script src="menu.js"></script>
     <script src="cart.js"></script>
